@@ -1,0 +1,43 @@
+{% set name = "django-recurrence" %}
+{% set version = "1.11.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/django-recurrence-{{ version }}.tar.gz
+  sha256: 9c89444e651a78c587f352c5f63eda48ab2f53996347b9fcdff2d248f4fcff70
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python >=3.7
+    - setuptools-scm
+    - pip
+  run:
+    - python >=3.7
+    - django >=2.2
+    - python-dateutil
+
+test:
+  imports:
+    - recurrence
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/django-recurrence/django-recurrence
+  summary: Django utility wrapping dateutil.rrule
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - https://github.com/gb119
